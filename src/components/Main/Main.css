@@ -1,0 +1,6 @@
+main {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
