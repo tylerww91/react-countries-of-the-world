@@ -1,0 +1,6 @@
+.country-card {
+  display: grid;
+  border: 1px solid black;
+  gap: 5px;
+  background-color: rgba(255, 228, 196, 0.527);
+}
