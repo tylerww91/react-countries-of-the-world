@@ -7,7 +7,8 @@ import { useState } from 'react';
 export default function Main() {
   const [order, setOrder] = useState('asc');
   const [searchName, setSearchName] = useState('');
-  const { countries, error } = useCountries(order, searchName);
+  const [loading, setLoading] = useState(false);
+  const { countries, error } = useCountries(order, searchName, setLoading);
   const [continent, setContinent] = useState('all');
   //Set removes duplicates
   const continents = [...new Set(countries.map(({ continent }) => continent))];
@@ -22,6 +23,7 @@ export default function Main() {
   return (
     <main style={{ backgroundImage: `url(${background})` }}>
       <div className="select-container">
+        <p>{loading ? `loading...` : `loaded`}</p>
         <select onChange={(e) => setContinent(e.target.value)}>
           <option value="all">all</option>
           {continents.map((continent) => (
