@@ -1,5 +1,6 @@
 import './Main.css';
 import CountryCard from '../CountryCard/CountryCard';
+import background from '../../un.png';
 import { useCountries } from '../../hooks/useCountries';
 import { useState } from 'react';
 
@@ -14,19 +15,23 @@ export default function Main() {
   );
 
   return (
-    <main>
-      <select onChange={(e) => setContinent(e.target.value)}>
-        <option value="all">all</option>
-        {continents.map((continent) => (
-          <option key={continent} value={continent}>
-            {continent}
-          </option>
-        ))}
-      </select>
+    <main style={{ backgroundImage: `url(${background})` }}>
+      <div className="select-container">
+        <select onChange={(e) => setContinent(e.target.value)}>
+          <option value="all">all</option>
+          {continents.map((continent) => (
+            <option key={continent} value={continent}>
+              {continent}
+            </option>
+          ))}
+        </select>
+      </div>
       <p>{error}</p>
-      {filtered.map((country) => (
-        <CountryCard key={country.id} {...country} />
-      ))}
+      <div className="card-container">
+        {filtered.map((country) => (
+          <CountryCard key={country.id} {...country} />
+        ))}
+      </div>
     </main>
   );
 }
