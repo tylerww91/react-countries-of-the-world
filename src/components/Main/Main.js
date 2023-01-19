@@ -6,9 +6,9 @@ import { useState } from 'react';
 
 export default function Main() {
   const [order, setOrder] = useState('asc');
-  const { countries, error } = useCountries(order);
+  const [searchName, setSearchName] = useState('');
+  const { countries, error } = useCountries(order, searchName);
   const [continent, setContinent] = useState('all');
-  // const [name, setName] = useState('all');
   //Set removes duplicates
   const continents = [...new Set(countries.map(({ continent }) => continent))];
   // const names = [...new Set(countries.map(({ name }) => name))];
@@ -30,6 +30,7 @@ export default function Main() {
             </option>
           ))}
         </select>
+        <input onChange={(e) => setSearchName(e.target.value)} />
         <select onChange={(e) => setOrder(e.target.value)}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
