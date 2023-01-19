@@ -5,14 +5,19 @@ import { useCountries } from '../../hooks/useCountries';
 import { useState } from 'react';
 
 export default function Main() {
-  const { countries, error } = useCountries();
+  const [order, setOrder] = useState('asc');
+  const { countries, error } = useCountries(order);
   const [continent, setContinent] = useState('all');
+  // const [name, setName] = useState('all');
   //Set removes duplicates
   const continents = [...new Set(countries.map(({ continent }) => continent))];
+  // const names = [...new Set(countries.map(({ name }) => name))];
 
   const filtered = countries.filter(
     (country) => country.continent === continent || continent === 'all'
   );
+
+  // const nameFilter = countries.filter((country) => country.name === name || name === 'all');
 
   return (
     <main style={{ backgroundImage: `url(${background})` }}>
@@ -24,6 +29,10 @@ export default function Main() {
               {continent}
             </option>
           ))}
+        </select>
+        <select onChange={(e) => setOrder(e.target.value)}>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
         </select>
       </div>
       <p>{error}</p>
